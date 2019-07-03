@@ -1,7 +1,6 @@
 package com.aws.java.sdk.controller;
 
 import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
@@ -18,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class S3Controller {
 
+    private static final String BUCKET_ALREADY_EXISTS = "Bucket Already Exists";
+    private static final String BUCKET_NOT_EXISTS = "Bucket Not Exists";
+    private static final String BUCKET_CREATED = "Bucket Created";
+    private static final String BUCKET_DELETED = "Bucket Deleted";
+
+
     Constants constants = new Constants();
     AWSCredentials credentials = new BasicAWSCredentials(constants.AWS_ACCESS_KEY, constants.AWS_ACCESS_SEC);
 
@@ -27,33 +32,31 @@ public class S3Controller {
             .withRegion(Regions.US_EAST_2)
             .build();
 
-    Bucket b = null;
-
-  @GetMapping(value = "create")
-    public String createBucket(@RequestParam(name = "bucketName",required = true) final String bucketName) {
+    @GetMapping(value = "create")
+    public String createBucket(@RequestParam(name = "bucketName", required = true) final String bucketName) {
         if (s3.doesBucketExistV2(bucketName)) {
-            return "Bucket Exists!!!";
+            return BUCKET_ALREADY_EXISTS;
         } else {
             try {
                 s3.createBucket(bucketName);
             } catch (IllegalArgumentException e) {
-                return e.toString();
+                return e.getMessage();
             }
-            return "bucket created";
+            return BUCKET_CREATED;
         }
     }
 
     @GetMapping(value = "delete")
-    public String deleteBucket(@RequestParam(name = "bucketName",required = true) final String bucketName){
-        if(!s3.doesBucketExistV2(bucketName)){
-            return "BUcket Exists";
+    public String deleteBucket(@RequestParam(name = "bucketName", required = true) final String bucketName) {
+        if (!s3.doesBucketExistV2(bucketName)) {
+            return BUCKET_NOT_EXISTS;
         } else {
             try {
                 s3.deleteBucket(bucketName);
-            }catch (Exception e){
-                return e.toString();
+            } catch (Exception e) {
+                return e.getMessage();
             }
         }
-        return "Bucket Deleted";
+        return BUCKET_DELETED;
     }
 }
