@@ -24,31 +24,36 @@ public class SQSController {
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .withRegion(Regions.US_EAST_2)
             .build();
+    String s = null;
 
     @GetMapping(value = "create")
     public String createQueue(@RequestParam(name = "qName", required = true) final String qName){
 
-        GetQueueUrlResult sqsString = sqs.getQueueUrl(qName);
-
-        if(sqsString.getQueueUrl().contains(qName)){
-            return "Existing Queue";
-        }
-        else {
-            sqs.createQueue(qName);
-            return "Queue_Created";
-        }
+       try {
+           GetQueueUrlResult sqsString = sqs.getQueueUrl(qName);
+           if(sqsString.getQueueUrl().contains(qName)){
+               s = "Existing Queue";
+           }
+       }catch (Exception e) {
+           sqs.createQueue(qName);
+           s = "Queue_Created";
+       }
+       return s;
     }
 
     @GetMapping(value = "delete")
-    public String deleteQueue(@RequestParam(name = "qName", required = true)final String qName){
-        GetQueueUrlResult sqsString = sqs.getQueueUrl(qName);
+    public String deleteQueue(@RequestParam(name = "qName", required = true)final String qName) {
 
-        if(sqsString.getQueueUrl().contains(qName)){
-            sqs.deleteQueue(qName);
-            return "Queue_Deleted";
-        } else {
-            return "Queue_Do_Not_Exist";
+        try {
+            GetQueueUrlResult sqsString = sqs.getQueueUrl(qName);
+            if(sqsString.getQueueUrl().contains(qName)){
+                sqs.deleteQueue(qName);
+                s =  "Queue_Deleted";
+            }
+        } catch (Exception e){
+            s = "Queue_Does_Not_Exist";
         }
+        return s;
     }
 
 }
