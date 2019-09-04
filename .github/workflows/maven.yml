@@ -11,9 +11,10 @@ jobs:
         
         steps: 
             - name: Display the path
+              run : cd d:\a
               run: DIR
               shell: cmd
-              #run : cd d:\a
+              
             - name: Running the Build Job
               run: mvn package
         
