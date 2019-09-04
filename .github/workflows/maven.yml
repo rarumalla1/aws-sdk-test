@@ -14,8 +14,8 @@ jobs:
               run : cd D:/a/aws-sdk-test
               shell: bash
             
-            - name: diaplay the path
-              run: ls
+            - name: display the path
+              run: pwd
               shell: bash
               
             - name: Running the Build Job
