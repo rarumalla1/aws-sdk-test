@@ -13,6 +13,8 @@ jobs:
             - name: change the path
               run: cd /d/a/aws-sdk-test
               shell: bash
+              run: pwd
+              shell: bash
             
             - name: display the path
               run: pwd
