@@ -11,7 +11,7 @@ jobs:
         
         steps: 
             - name: change to the directory
-            - run : cd d:\a\aws-sdk-test
+              run : cd d:\a\aws-sdk-test
             - name: Running the Build Job
               run: mvn package
         
