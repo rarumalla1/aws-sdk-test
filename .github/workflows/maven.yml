@@ -11,7 +11,7 @@ jobs:
         
         steps: 
             - name: change the path
-              run : cd /d/a/aws-sdk-test
+              run: cd /d/a/aws-sdk-test
               shell: bash
             
             - name: display the path
