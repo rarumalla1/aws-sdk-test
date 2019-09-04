@@ -10,11 +10,11 @@ jobs:
         runs-on: windows-latest
         
         steps: 
-          #  - name: change the path
-              run: cd /d/a/aws-sdk-test
+            - name: change the path
+              run: cd /d/a/aws-sdk-test && mvn package
               shell: bash
               
-          #  - name: display the path
+            - name: display the path
               run: pwd
               shell: bash
               
