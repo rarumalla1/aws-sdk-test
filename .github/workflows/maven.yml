@@ -11,7 +11,7 @@ jobs:
         
         steps: 
             - name: change the path
-              run : cd d:\a
+              run : cd d:\a\aws-sdk-test
             
             - name: diaplay the path
               run: DIR
