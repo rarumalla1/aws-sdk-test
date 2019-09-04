@@ -1,0 +1,15 @@
+name: Test CI for the AWS-SDK-TEST
+on: 
+    push:
+        branches: 
+            - master
+            - 'release/*'
+
+jobs: 
+    build: 
+        runs-on: ubuntu-latest
+        
+        steps: 
+            - name: Running the Build Job
+              run: mvn package --file pom.xml
+        
