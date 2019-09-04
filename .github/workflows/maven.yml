@@ -10,8 +10,10 @@ jobs:
         runs-on: windows-latest
         
         steps: 
-            - name: Display the path
+            - name: change the path
               run : cd d:\a
+            
+            - name: diaplay the path
               run: DIR
               shell: cmd
               
