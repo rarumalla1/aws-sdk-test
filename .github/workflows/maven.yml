@@ -12,11 +12,11 @@ jobs:
         steps: 
             - name: change the path
               run : cd d:\a\aws-sdk-test
-              shell: cmd
+              shell: bash
             
             - name: diaplay the path
-              run: DIR
-              shell: cmd
+              run: ls
+              shell: bash
               
             - name: Running the Build Job
               run: mvn package
