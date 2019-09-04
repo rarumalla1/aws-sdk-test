@@ -11,7 +11,7 @@ jobs:
         
         steps: 
             - name: Display the path
-              run: cd
+              run: DIR
               shell: cmd
               #run : cd d:\a
             - name: Running the Build Job
