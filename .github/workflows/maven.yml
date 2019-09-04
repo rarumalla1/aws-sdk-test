@@ -10,8 +10,10 @@ jobs:
         runs-on: windows-latest
         
         steps: 
-            - name: change to the directory
-              run : cd d:\a
+            - name: Display the path
+              run: echo %PATH%
+              shell: cmd
+              #run : cd d:\a
             - name: Running the Build Job
               run: mvn package
         
