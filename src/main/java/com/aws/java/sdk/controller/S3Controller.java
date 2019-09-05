@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequestMapping("/aws")
 @RestController
 public class S3Controller {
@@ -39,10 +41,11 @@ public class S3Controller {
         } else {
             try {
                 s3.createBucket(bucketName);
+                //s3.createBucket(bucketName);
             } catch (IllegalArgumentException e) {
                 return e.getMessage();
             }
-            return BUCKET_CREATED;
+            return "BUCKET_CREATED";
         }
     }
 
@@ -59,4 +62,10 @@ public class S3Controller {
         }
         return BUCKET_DELETED;
     }
+
+    @GetMapping(value = "listBuckets")
+    public List<Bucket> listBuckets() {
+        return s3.listBuckets();
+    }
 }
+
